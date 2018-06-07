@@ -1,0 +1,310 @@
+<html>
+<head> 
+<title> RCalendar </title>
+</head>
+<body>
+    
+    <div class="container">   
+    
+  
+        <h1> AGE CALUCLATOR</h1>
+<div id="first">
+
+      <div class="group">      
+        <input type="text" id="date" required>
+        <span class="highlight"></span>
+        <span class="bar"></span>
+        <label>Date</label>
+      </div>
+    
+        
+      <div class="group" >      
+        <input type="text" id="month" required>
+        <span class="highlight" align="center"></span>
+        <span class="bar" align="center"></span>
+        <label>Month</label>
+      </div>  
+      
+       <div class="group">      
+        <input type="text" id="year" required>
+        <span class="highlight"></span>
+        <span class="bar"></span>
+        <label>Year</label> 
+      </div> 
+      <button class="btn info" type="button" value="submit" onclick=" myFunction()">Submit</button>  
+      
+
+    </div>
+    <div id="second" hidden>
+
+    <div id ="content" >
+        <p> Years You've Lived  <p id="noy"></p> </p>
+        <p> Months You've Lived<p id="nom"></p> </p>
+        <p> Weeks You've Lived  <p id="now"></p> </p>
+        <p> Days You've Lived   <p id="nod"> </p>  </p>
+        <p> Hours You've Lived  <p id="noh"></p> </p>
+        <p> Minutes You've Lived  <p id="nomi"></p></p>
+        <p> Seconds You've Lived <p id="nos"></p></p>
+      </div>
+
+  </div>
+    </div>
+
+    
+<style>
+  #content {  
+  padding-top: 1%;
+  padding-bottom: 10%;}
+p{ color : #3c3b81;}
+  .btn {
+    border: 1px solid ;
+    background-color:rgba(0, 0, 0, 0);
+    padding: 14px 28px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 65%;
+}
+.info {
+    border-color: #3c3b81;
+    color: dodgerblue
+}
+
+.info:hover {
+    background: #3c3b81;
+    color: white;
+}
+
+    * { box-sizing:border-box; }
+    .submit { cursor: pointer;}
+
+    .center {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 100%;
+    text-align: center;
+    font-size: 18px;
+}
+
+/* basic stylings ------------------------------------------ */
+
+.container 		{ 
+  
+  font-family:'Roboto';
+  width:100%; 
+  height: 100%; 
+  display:block; 
+  background:url(http://sfwallpaper.com/images/plain-backgrounds-26.jpg);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  
+    padding-right: 30%;
+    padding-left: 40%;
+    padding-top: 1%;
+    padding-bottom: 10%;
+
+
+}
+h1		 { 
+  
+  margin-bottom:50px; 
+}
+
+
+
+
+/* form starting stylings ------------------------------- */
+.group 			  { 
+  position:relative; 
+  margin-bottom:45px; 
+  
+}
+input 				{
+  font-size:18px;
+  padding:10px 10px 10px 5px;
+  display:list-item;
+  width:300px;
+  border:none;
+  border-bottom:1px solid #3c3b81;
+  background: rgba(0, 0, 0, 0);
+ 
+  
+  
+}
+input:focus { outline: none; }
+
+/* LABEL ======================================= */
+
+label 				 {
+  color:rgb(10, 138, 212) ; 
+  font-size:18px;
+  font-weight:normal;
+  position:absolute;
+  pointer-events:none;
+  left:5px;
+  top:10px;
+  transition:0.2s ease all; 
+  -moz-transition:0.2s ease all; 
+  -webkit-transition:0.2s ease all;
+ 
+}
+
+/* active state */
+input:focus ~ label, input:valid ~ label 		{
+  top:-20px;
+  font-size:14px;
+  color:#3c3b81;
+}
+
+/* BOTTOM BARS ================================= */
+.bar 	{ 
+  position:relative; display:block; width:300px;
+ 
+ }
+.bar:before, .bar:after 	{
+  content:'';
+  height:2px; 
+  width:0;
+  bottom:1px; 
+  position:absolute;
+  background:#5264AE; 
+  transition:0.2s ease all; 
+  -moz-transition:0.2s ease all; 
+  -webkit-transition:0.2s ease all;
+}
+.bar:before {
+  left:50%;
+}
+.bar:after {
+  right:50%; 
+}
+
+/* active state */
+input:focus ~ .bar:before, input:focus ~ .bar:after {
+  width:50%;
+}
+
+/* HIGHLIGHTER ================================== */
+.highlight {
+  position:absolute;
+  height:60%; 
+  width:100px; 
+  top:25%; 
+  left:0;
+  pointer-events:none;
+  opacity:0.5;
+}
+
+/* active state */
+input:focus ~ .highlight {
+  -webkit-animation:inputHighlighter 0.3s ease;
+  -moz-animation:inputHighlighter 0.3s ease;
+  animation:inputHighlighter 0.3s ease;
+}
+
+/* ANIMATIONS ================ */
+@-webkit-keyframes inputHighlighter {
+	from { background:#5264AE; }
+  to 	{ width:0; background:transparent; }
+}
+@-moz-keyframes inputHighlighter {
+	from { background:#5264AE; }
+  to 	{ width:0; background:transparent; }
+}
+@keyframes inputHighlighter {
+	from { background:#5264AE; }
+  to 	{ width:0; background:transparent; }
+}
+</style>
+<script>
+
+var hours=0;
+var min=0;
+var sec=0;
+var diffDays=0;
+
+function myFunction() {
+var text = "";
+var numberofyears=0;
+var lipeyear = 4;
+var numberofmonths=0;
+var numberofdays=0;
+
+
+   var year = document.getElementById("year").value;
+      var month = document.getElementById("month").value;
+   var datee = document.getElementById("date").value;
+   
+    var date = new Date();
+    var currentyear = date.getFullYear();
+       var currentmonth1 = date.getMonth();
+       var currentmonth = currentmonth1+1;
+       var currentdate =  date.getDate();
+       var submonth=12-currentmonth;
+       var submonth2=12-month;
+
+        numberofyears=currentyear-year;
+         if(currentmonth<month){
+         numberofyears=numberofyears-1;
+         }
+         if(currentmonth==month){
+         if(currentdate<datee){
+         numberofyears=numberofyears-1;
+
+         }
+         }
+   numberofmonths=numberofyears*12
+      
+
+       numberofmonths=numberofmonths-submonth;
+       numberofmonths=numberofmonths+submonth2;
+       document.getElementById("noy").innerHTML = numberofyears;
+       document.getElementById("nom").innerHTML = numberofmonths-1;
+       
+var dobdatefull=month+"/"+datee+"/"+year;
+var currentfulldate=currentmonth+"/"+currentdate+"/"+currentyear;
+var date1 = new Date(dobdatefull);
+var date2 = new Date(currentfulldate);
+var timeDiff = Math.abs(date2.getTime() - date1.getTime());
+ diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24)); 
+      document.getElementById("nod").innerHTML = diffDays-1;
+      var weeks= diffDays/7;
+      document.getElementById("now").innerHTML = weeks;
+     var hours1= diffDays*24;
+     var hours2=hours1-24;
+     var hours3= date.getHours();
+     hours=hours2+hours3;
+     var min1=hours*60;
+     var min2 = date.getMinutes();
+      min=min1+min2;
+      sec=min*60;
+       document.getElementById("noh").innerHTML = hours;
+ document.getElementById("nomi").innerHTML = min;
+
+      
+var myVar = setInterval(secc,1000);
+var myVarq = setInterval(minn,60000);
+var myVarqk= setInterval(minn,3600000);
+var myVarm = lamb(secc,1000);
+
+}
+function hourss(){
+hours=hours+1;
+ document.getElementById("noh").innerHTML = hours;
+}
+function minn(){
+min=min+1;
+ document.getElementById("nomi").innerHTML = min;
+}
+function secc(){
+sec=sec+1;
+ document.getElementById("nos").innerHTML = sec;
+}
+function lamb(){
+  document.getElementById("first").innerHTML =  document.getElementById("second").innerHTML;
+
+
+}
+</script>
+</body>
+</html>
